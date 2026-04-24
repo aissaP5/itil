@@ -121,9 +121,44 @@ async def set_scenario(data: ScenarioInput):
 async def get_all_metrics(devices: List[DeviceInfo]):
     return {d.name: sim_engine.get_metrics(d.name, d.type) for d in devices}
 
-@app.get("/health")
-async def health_check():
-    return {"status": "ok", "current_scenario": sim_engine.scenario}
+@app.post("/remediate")
+async def run_remediation(data: Dict):
+    problem = data.get("problem", "Normal")
+    device = data.get("device", "Unknown")
+    
+    # Simulate different script steps based on the problem
+    steps = [
+        f"[SSH] Connecting to {device}...",
+        f"[AUTH] Credentials verified.",
+        f"[INFO] Analyzing environment for {problem}...",
+    ]
+    
+    if "CPU" in problem or "RAM" in problem:
+        steps += [
+            "[EXEC] Identifying high-resource processes...",
+            "[EXEC] Sending SIGTERM to non-critical runaway tasks...",
+            "[INFO] Resource usage stabilizing."
+        ]
+    elif "Disk" in problem:
+        steps += [
+            "[EXEC] Cleaning /tmp directory...",
+            "[EXEC] Compressing old log files...",
+            "[INFO] 1.4GB of space recovered."
+        ]
+    elif "Security" in problem:
+        steps += [
+            "[EXEC] Blocking suspicious IP ranges...",
+            "[EXEC] Updating firewall iptables...",
+            "[INFO] Intrusion prevention active."
+        ]
+    else:
+        steps += [
+            f"[EXEC] Restarting service associated with {problem}...",
+            "[INFO] Service check: OK."
+        ]
+        
+    steps.append("[SUCCESS] System resilience restored.")
+    return {"steps": steps}
 
 if __name__ == "__main__":
     import uvicorn
