@@ -1,0 +1,16 @@
+log,label
+"ERROR CPU usage exceeded 95%",CPU problem
+"ERROR No space left on device",Disk problem
+"ERROR connection refused",Network problem
+"ERROR nginx service failed",Service crash
+"POST /login SQL Injection attempt",Security attack
+"INFO User logged in",Normal
+"WARNING High memory usage",RAM problem
+"ERROR 500 Internal Server Error",Service crash
+"POST /api/data?id=1' OR 1=1",Security attack
+"ERROR Disk quota exceeded",Disk problem
+"ERROR Network unreachable",Network problem
+"ERROR kernel: temperature above threshold",CPU problem
+"ERROR out of memory: kill process",RAM problem
+"POST /upload_file size too large",Disk problem
+"ERROR database connection timed out",Network problem

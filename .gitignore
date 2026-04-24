@@ -1,0 +1,20 @@
+# Node.js
+node_modules/
+dist/
+.env
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.ipynb_checkpoints/
+
+# ML Models (Ignore trained weights to keep repo small)
+ml-model/models/*.pkl
+
+# IDEs
+.vscode/
+.idea/
